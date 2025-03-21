@@ -7,7 +7,15 @@ const TaskItem = memo(({ task }) => {
 
     return (
         <div>
-            <span onClick={() => toggleTask(task.id)}>{task.text}</span>
+            <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => toggleTask(task.id)}
+                className="mr-2 cursor-pointer"
+            />
+            <span className={task.completed ? "line-through text-gray-500" : ""}>
+                {task.text}
+            </span>
             <button onClick={() => deleteTask(task.id)}>Delete Task</button>
         </div>
     )

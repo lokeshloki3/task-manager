@@ -20,7 +20,7 @@ export default function AppContextProvider({ children }) {
     }, [tasks, setTasks]);
 
     return (
-        <AppContext.Provider value={{ tasks, addTask, deleteTask, toggleTask }}>
+        <AppContext.Provider value={{ tasks, setTasks, addTask, deleteTask, toggleTask }}>
             {children}
         </AppContext.Provider>
     );
