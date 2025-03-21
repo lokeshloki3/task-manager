@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import "../App.css";
 
 const ThemeToggle = () => {
 
@@ -10,7 +11,9 @@ const ThemeToggle = () => {
     }, [darkMode]);
 
     return (
-        <button onClick={() => setDarkMode(!darkMode)}>Toggle Theme</button>
+        <div className='text-center'>
+            <button onClick={() => setDarkMode(!darkMode)}>Toggle Theme</button>
+        </div>
     )
 }
 

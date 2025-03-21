@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FilterButtons = ({ onFilterChange }) => {
+const FilterButtons = () => {
     return (
         <div>
             <button onClick={() => onFilterChange('all')}>All</button>

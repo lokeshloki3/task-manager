@@ -27,7 +27,7 @@ const TaskForm = () => {
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                     required
-                    className='border rounded-2xl p-2'
+                    className='border rounded-2xl p-2 bg-white'
                 />
                 <button type='submit' className='bg-blue-100 m-4 p-2 rounded-2xl hover:bg-amber-300 hover:cursor-pointer'>Add Task</button>
             </form>

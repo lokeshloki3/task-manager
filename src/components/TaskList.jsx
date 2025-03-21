@@ -28,6 +28,7 @@ const TaskList = () => {
                             <Draggable key={task.id} draggableId={task.id} index={index}>
                                 {(provided) => (
                                     <div
+                                    className='m-2'
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
