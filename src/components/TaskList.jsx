@@ -24,10 +24,15 @@ const TaskList = () => {
                 <button onClick={() => setFilter("pending")}>Pending</button>
             </div>
             {
-                filteredTasks.map((task) => {
+                filteredTasks.map((task) => (
                     <TaskItem key={task.id} task={task} />
-                })
+                ))
             }
+            {/* {
+                filteredTasks.map((task) => {
+                    return <TaskItem key={task.id} task={task} />
+                })
+            } */}
         </div>
     )
 }

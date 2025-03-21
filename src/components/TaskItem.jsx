@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { memo, useContext } from 'react'
+import { AppContext } from '../context/AppContext';
 
-const TaskItem = () => {
-  return (
-    <div>TaskItem</div>
-  )
-}
+const TaskItem = memo(({ task }) => {
 
-export default TaskItem
+    const { toggleTask, deleteTask } = useContext(AppContext);
+
+    return (
+        <div>
+            <span onClick={() => toggleTask(task.id)}>{task.text}</span>
+            <button onClick={() => deleteTask(task.id)}>Delete Task</button>
+        </div>
+    )
+});
+
+export default TaskItem;
