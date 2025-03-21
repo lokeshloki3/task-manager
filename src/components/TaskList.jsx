@@ -1,15 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import TaskItem from './TaskItem';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import "../App.css";
+import ThemeToggle from './ThemeToggle';
 
 const TaskList = () => {
     const { tasks, setTasks } = useContext(AppContext);
-    console.log(tasks)
+    const [filter, setFilter] = useState("All");
+    const [tasksToDisplay, setTasksToDisplay] = useState(tasks);
+    // console.log(tasks)
+
+    useEffect(() => {
+        if (filter === "Completed") {
+            setTasksToDisplay(tasks.filter(task => task.completed));
+        } else if (filter === "Pending") {
+            setTasksToDisplay(tasks.filter(task => !task.completed));
+        } else {
+            setTasksToDisplay(tasks);
+        }
+    }, [tasks, filter]);
 
     const onDragEnd = (result) => {
-        if (!result.destination) return;
+        if (!result.destination || filter !== "All") return;
 
         const { source, destination } = result;
         const reorderedTasks = [...tasks];
@@ -20,29 +33,34 @@ const TaskList = () => {
     };
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="tasks">
-                {(provided) => (
-                    <div className="tasks" ref={provided.innerRef} {...provided.droppableProps}>
-                        {tasks.map((task, index) => (
-                            <Draggable key={task.id} draggableId={task.id} index={index}>
-                                {(provided) => (
-                                    <div
-                                    className='m-2'
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                    >
-                                        <TaskItem task={task} />
-                                    </div>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
-        </DragDropContext>
+
+        <div>
+            <ThemeToggle filter={filter} setFilter={setFilter} />
+
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="tasks" isDropDisabled={filter !== "All"}>
+                    {(provided) => (
+                        <div className="tasks" ref={provided.innerRef} {...provided.droppableProps}>
+                            {tasksToDisplay.map((task, index) => (
+                                <Draggable key={task.id} draggableId={task.id} index={index}>
+                                    {(provided) => (
+                                        <div
+                                            className='m-2'
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                        >
+                                            <TaskItem task={task} />
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
+        </div>
     );
 };
 
