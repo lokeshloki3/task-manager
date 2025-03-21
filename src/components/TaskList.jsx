@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import TaskItem from './TaskItem';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import "../App.css"
+import "../App.css";
 
 const TaskList = () => {
     const { tasks, setTasks } = useContext(AppContext);
@@ -23,7 +23,7 @@ const TaskList = () => {
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="tasks">
                 {(provided) => (
-                    <div className="tasks"  ref={provided.innerRef} {...provided.droppableProps}>
+                    <div className="tasks" ref={provided.innerRef} {...provided.droppableProps}>
                         {tasks.map((task, index) => (
                             <Draggable key={task.id} draggableId={task.id} index={index}>
                                 {(provided) => (

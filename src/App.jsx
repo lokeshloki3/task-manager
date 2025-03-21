@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div>
-      <h1>Task Manager</h1>
+      <h1 className='text-center m-6 text-5xl'>Task Manager</h1>
       <TaskForm />
       <TaskList />
     </div>
